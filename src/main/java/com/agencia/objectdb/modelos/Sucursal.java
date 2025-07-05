@@ -2,9 +2,11 @@ package com.agencia.objectdb.modelos;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
- * @author Juan Manuel Sanchez Hernandez
+ * @author Juan Manuel
  */
 @Entity
 public class Sucursal implements Serializable {
@@ -22,26 +24,29 @@ public class Sucursal implements Serializable {
     @Column(nullable = false)
     private String direccion;
 
+    @Column(nullable = false)
+    private String ciudad;
+
     @Column(nullable = false, length = 10)
     private String telefono;
 
     @OneToMany(mappedBy = "sucursal")
     private List<Turista> turistas = new ArrayList<>();
 
-    //Constructor vacio JPA
+    // Constructor vacío requerido por JPA
     public Sucursal() {
     }
 
-    // Constructor con parametros
-    public Sucursal(String codigoSucursal, String nombre, String direccion, String telefono) {
+    // Constructor con parámetros
+    public Sucursal(String codigoSucursal, String nombre, String direccion, String telefono, String ciudad) {
+        this.codigoSucursal = codigoSucursal;
         this.nombre = nombre;
         this.direccion = direccion;
+        this.ciudad = ciudad;
         this.telefono = telefono;
-        this.codigoSucursal = codigoSucursal;
-
     }
-    // Getters y Setters
 
+    // Getters y setters
     public Long getId() {
         return id;
     }
@@ -82,9 +87,24 @@ public class Sucursal implements Serializable {
         this.telefono = telefono;
     }
 
+    public List<Turista> getTuristas() {
+        return turistas;
+    }
+
+    public void setTuristas(List<Turista> turistas) {
+        this.turistas = turistas;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
     @Override
     public String toString() {
         return "Sucursal: " + nombre + " | Código: " + codigoSucursal + " | Tel: " + telefono;
     }
-
 }

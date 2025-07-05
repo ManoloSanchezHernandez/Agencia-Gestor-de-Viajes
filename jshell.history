@@ -1,0 +1,1 @@
+VAR#>mvn compile exec:java -Dexec.mainClass=com.agencia.objectdb.app.App
